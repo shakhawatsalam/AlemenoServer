@@ -1,5 +1,4 @@
 export type ICourse = {
-  id: number;
   name: string;
   instructor: string;
   description: string;

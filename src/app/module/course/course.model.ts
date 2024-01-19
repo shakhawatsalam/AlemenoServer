@@ -3,7 +3,6 @@ import { ICourse } from "./course.interface";
 
 const CourseSchema: Schema<ICourse> = new mongoose.Schema(
   {
-    id: { type: Number, required: true },
     name: { type: String, required: true },
     instructor: { type: String, required: true },
     description: { type: String, required: true },
