@@ -1,6 +1,7 @@
 import mongoose, { Model, Schema } from "mongoose";
 import { ICourse } from "./course.interface";
 
+
 const CourseSchema: Schema<ICourse> = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -16,6 +17,7 @@ const CourseSchema: Schema<ICourse> = new mongoose.Schema(
     schedule: { type: String, required: true },
     location: { type: String, required: true },
     prerequisites: { type: [String], required: true },
+    complete: { type: Boolean },
     syllabus: [
       {
         week: { type: Number, required: true },

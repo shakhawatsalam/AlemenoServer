@@ -7,15 +7,13 @@ import courseModel from "./course.model";
 
 // * Create Course
 const createCourse = async (payload: ICourse): Promise<ICourse | null> => {
+  payload.complete = false;
   const result = await courseModel.create(payload);
   return result;
 };
 
 // * get all user
-const getAllCourse = async (
-  filters: any, //Partial<ParsedQs>
-  paginationOptions: any
-) => {
+const getAllCourse = async (filters: any, paginationOptions: any) => {
   const { searchTerm, ...filtersData } = filters;
 
   const andCondition = [];
@@ -32,7 +30,6 @@ const getAllCourse = async (
   }
 
   if (Object.keys(filtersData).length) {
-  
     andCondition.push({
       $and: Object.entries(filtersData).map(([field, value]) => ({
         [field]: value,
@@ -46,16 +43,15 @@ const getAllCourse = async (
   const sortCondition: { [key: string]: SortOrder } = {};
 
   if (sortBy && sortOrder) {
-    sortCondition[sortBy] = sortOrder; 
+    sortCondition[sortBy] = sortOrder;
   }
 
   const whereConditions = andCondition.length > 0 ? { $and: andCondition } : {};
   const result = await courseModel
     .find(whereConditions)
-    .sort(sortCondition) 
+    .sort(sortCondition)
     .skip(skip)
     .limit(limit);
-
 
   const total = await courseModel.countDocuments(whereConditions);
   return {

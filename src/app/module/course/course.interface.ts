@@ -8,6 +8,7 @@ export type ICourse = {
   schedule: string;
   location: string;
   prerequisites: string[];
+  complete: boolean;
   syllabus: {
     week: number;
     topic: string;
